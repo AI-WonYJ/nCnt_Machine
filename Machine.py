@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime
 import time
 
+# yolo 
 def yolo(frame, size, score_threshold, nms_threshold):
     # YOLO 네트워크 불러오기
     net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
@@ -133,6 +134,7 @@ def machine():
     # 입력 사이즈 리스트 (Yolo 에서 사용되는 네크워크 입력 이미지 사이즈)
     size_list = [320, 416, 608]
 
+    #동아리방 인원 수 저장 변수
     global ncnt_people
     ncnt_people = 0
 
@@ -147,7 +149,7 @@ def machine():
 
 
 
-# 여기부터 플래스크 백엔드 
+# 여기부터 Flask
 app = Flask(__name__)
 
 @app.route('/')
