@@ -161,4 +161,4 @@ def OUTPUT():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0')
+    app.run() # app.run(host='0.0.0.0') <<<< 동아리방 포트포워드 사용시 이용
