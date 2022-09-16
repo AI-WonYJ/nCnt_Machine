@@ -4,7 +4,6 @@ import cv2
 import numpy as np
 from datetime import datetime
 import time
-import random
 
 def yolo(frame, size, score_threshold, nms_threshold):
     # YOLO 네트워크 불러오기
@@ -145,11 +144,14 @@ def machine():
     cv2.waitKey(3) #ms
     cv2.destroyAllWindows()
 
+
+
+
 # 여기부터 플래스크 백엔드 
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def OUTPUT():
     machine()
     current_time = datetime.now()
     current_time = str(current_time)[0:19]
@@ -157,4 +159,4 @@ def hello_world():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
