@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import cv2
 import numpy as np
 from datetime import datetime
@@ -115,10 +115,18 @@ def machine():
 app = Flask(__name__)
 
 @app.route('/')
-def OUTPUT():
+def loading():
+    return render_template('loading.html', url_for('go_OUTPUT'))
+
+@app.route('/loadig')
+def go_OUTPUT():
     machine()
+    return redirect(url_for('OUTPUT'))
+
+@app.route('/print')
+def OUTPUT():
     current_time = datetime.now()
-    current_time = str(current_time)[0:19]
+    current_time = str(current_time)[0:19]  
     return render_template('index.html', counting = ncnt_people, time = current_time)
 
 if __name__ == '__main__':
