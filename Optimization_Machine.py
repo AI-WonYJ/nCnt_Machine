@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from datetime import datetime
 import time
+import random
 
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 layer_names = net.getLayerNames()
@@ -112,12 +113,16 @@ def machine():
     print("\n사람 수: {0}명".format(ncnt_people))
 
     
-    
-    
+
+ncnt_people = "testing_"+str(random.randint(0,10))
+
+with open('ncnt.txt', "w") as file_write:
+  file_write.write(ncnt_people)
+
 machine()
 
-with open('cnt.txt', "r") as file:
-  for line in file:
+with open('ncnt.txt', "r") as file_read:
+  for line in read_file:
     print(line)
     ncnt_people = line
     
