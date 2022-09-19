@@ -111,17 +111,24 @@ def machine():
 
     print("\n사람 수: {0}명".format(ncnt_people))
 
-# # 여기부터 플래스크 백엔드 
+    
+    
+    
+machine()
+
+with open('cnt.txt', "r") as file:
+  for line in file:
+    print(line)
+    ncnt_people = line
+    
+    
+    
+# 여기부터 플래스크 백엔드, 수정해야 함
 app = Flask(__name__)
 
 @app.route('/')
 def loading():
     return render_template('loading.html', url_for('go_OUTPUT'))
-
-@app.route('/loadig')
-def go_OUTPUT():
-    machine()
-    return redirect(url_for('OUTPUT'))
 
 @app.route('/print')
 def OUTPUT():
