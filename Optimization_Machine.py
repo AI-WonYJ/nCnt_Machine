@@ -122,7 +122,7 @@ with open('ncnt.txt', "w") as file_write:
 machine()
 
 with open('ncnt.txt', "r") as file_read:
-  for line in read_file:
+  for line in file_read:
     print(line)
     ncnt_people = line
     
