@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template
 import cv2
 import numpy as np
 from datetime import datetime
-import time
 import random
 
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
@@ -62,6 +61,7 @@ def yolo(frame, size, score_threshold, nms_threshold):
             if class_name == "person":
                 ncnt_people += 1
           except IndexError: #에러가 발생하면 실행되는 부분
+            ncnt_people = "ERROR"
             pass #그냥 지나가고 싶다면, pass문을 사용하면 된다.
 
   return frame
@@ -76,25 +76,6 @@ classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "
 
 
 def machine():
-    # 웹캠으로 사진 찍기
-    cap = cv2.VideoCapture(0)
-    if cap.isOpened():
-        while True:
-            ret, frame = cap.read()
-            if ret:
-                # cv2.imshow('camera', frame)
-                if cv2.waitKey(1) == -1:
-                    # time.sleep(1)
-                    cv2.imwrite('photo.jpg',frame)
-                    break
-            else:
-                print('no frame')
-                break
-    else:
-        print('no camera!')
-
-    cap.release()
-
     # 이미지 경로
     img = "photo.jpg"
 
@@ -108,16 +89,13 @@ def machine():
     ncnt_people = 0
 
     frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
-    # cv2.imshow("Output_Yolo", frame)
 
-    print("\n사람 수: {0}명".format(ncnt_people))
+    current_time = datetime.now()
+    current_time = str(current_time)[0:19]  
+    # print("\n{0}    *사람 수: {1}명".format(current_time, ncnt_people))
 
-    
-
-ncnt_people = "testing_"+str(random.randint(0,10))
-
-with open('ncnt.txt', "w") as file_write:
-  file_write.write(ncnt_people)
+    with open('ncnt.txt', "w") as file_write:
+      file_write.write("{0},{1}".format(current_time, str(ncnt_people)))
 
 machine()
 
@@ -125,3 +103,18 @@ with open('ncnt.txt', "r") as file_read:
   for line in file_read:
     print(line)
     ncnt_people = line
+    
+    
+    
+# 여기부터 플래스크 백엔드, 수정해야 함
+app = Flask(__name__)
+
+@app.route('/')
+def OUTPUT():
+    current_time = datetime.now()
+    current_time = str(current_time)[0:19]  
+    return render_template('index.html', counting = ncnt_people, time = current_time)
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='0.0.0.0')
