@@ -74,3 +74,6 @@ https://hongong.hanbit.co.kr/mysql-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8
 
 #[mysql] 파이썬으로 이미지 데이터 mysql에 저장하고 읽어들여오기
 https://cleancode-ws.tistory.com/102
+
+# [opencv-python] 이미지 크기조절(resize) 하는 법
+https://daewoonginfo.blogspot.com/2019/05/opencv-python-resize.html
