@@ -76,11 +76,24 @@
     color: skyblue;
     background: white;
   }
+
+  .footer {
+  width:1200px auto;   /* 너비 */
+  height:100px;  /* 높이 */
+  padding-top: 10px;
+  border-top:2px solid #222;
+  text-align: center;
+  color: #879;
+  }
   </style>
 </head>
 <body>
-  <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://ssccpromotion.xyz/" target="_blank" rel="noopener noreferrer">SSCC</a></h1>
-  <div style="text-align:center;">
+  <header>
+    <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://ssccpromotion.xyz/" target="_blank" rel="noopener noreferrer">SSCC</a></h1>
+  </header>
+  
+  <main>
+    <div style="text-align:center;">
     <br><br>
     <img src="{{ url_for('static' , filename='images/kakao_lion.png')}}" alt="main Image" class="main-image"><br><br><br>
     <form>
@@ -92,11 +105,15 @@
       1분마다 자동 새로고침 중입니다.
       <br>
       새로고침은 대략 12초 소요됩니다.
+      <br><br><br><br><br>
       <!-- <button class="w-btn w-btn-indigo" type="summit">
         Button
       </button> -->
     </form>
     </div>
-  </div>
+  </main>
+  <footer>
+    &copy; 2022 SSCC
+  </footer>
 </body>
 </html>
