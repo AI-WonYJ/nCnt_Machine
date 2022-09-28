@@ -73,14 +73,14 @@ def analysis():
     frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
     print("\n사람 수: {0}명".format(ncnt_people))
 
-def machine(t):
+def machine():
     global old_time
     global ncnt_people
     dt = str(datetime.now())
     current_time = int(dt[17:19])
     if old_time != current_time:
         old_time = current_time
-        if  current_time % t == 0:
+        if  current_time % 3 == 0:
             cam()
             analysis()
             with open('ncnt.txt', "w") as file_write:
@@ -97,7 +97,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def OUTPUT():
-    machine(3)
+    machine()
     show()
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
