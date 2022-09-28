@@ -13,7 +13,7 @@ layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 def yolo(frame, size, score_threshold, nms_threshold):
-  height, width = frame.shape
+  height, width, channels = frame.shape
   blob = cv2.dnn.blobFromImage(frame, 0.00392, (size, size), (0, 0, 0), True, crop=False)
   net.setInput(blob)
   outs = net.forward(output_layers)
@@ -73,18 +73,18 @@ def analysis():
     frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
     print("\n사람 수: {0}명".format(ncnt_people))
 
-def machine():
+def machine(t):
     global old_time
     global ncnt_people
     dt = str(datetime.now())
     current_time = int(dt[17:19])
     if old_time != current_time:
         old_time = current_time
-        if  current_time % 1 == 0:
+        if  current_time % t == 0:
             cam()
             analysis()
             with open('ncnt.txt', "w") as file_write:
-                file_write.write(ncnt_people)
+                file_write.write(str(ncnt_people))
 
 def show():
     global ncnt_people
@@ -97,7 +97,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def OUTPUT():
-    machine()
+    machine(3)
     show()
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
