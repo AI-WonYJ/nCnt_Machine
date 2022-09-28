@@ -57,32 +57,38 @@ https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html
 19. [Python/내장함수] 예외 처리하기 (try / except문)
 https://juhee-maeng.tistory.com/18
 
-# [Python] Python에서의 with문 사용하기
+20. [Python] Python에서의 with문 사용하기
 https://twpower.github.io/17-with-usage-in-python
 
-# Python에서 파일 지우기
+21. Python에서 파일 지우기
 https://www.delftstack.com/ko/howto/python/python-clear-file/
 
-# 라즈베리파이 OpenCV 파이썬 카메라 상하좌우 반전
+23. 라즈베리파이 OpenCV 파이썬 카메라 상하좌우 반전
 https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=audiendo&logNo=220814938225
 
-# MySQL 강좌 : 제 1강 - 소개 및 설치
+24. MySQL 강좌 : 제 1강 - 소개 및 설치
 https://076923.github.io/posts/mysql-1/
 
-# MySQL 다운로드 및 설치하기(MySQL Community 8.0)
+25. MySQL 다운로드 및 설치하기(MySQL Community 8.0)
 https://hongong.hanbit.co.kr/mysql-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0mysql-community-8-0/
 
-#[mysql] 파이썬으로 이미지 데이터 mysql에 저장하고 읽어들여오기
+26. [mysql] 파이썬으로 이미지 데이터 mysql에 저장하고 읽어들여오기
 https://cleancode-ws.tistory.com/102
 
-# [opencv-python] 이미지 크기조절(resize) 하는 법
+27. [opencv-python] 이미지 크기조절(resize) 하는 법
 https://daewoonginfo.blogspot.com/2019/05/opencv-python-resize.html
 
-# [Python/Flask] HTTP POST 방식으로 파일 전송 (feat. requests, Flask.request)
+28. [Python/Flask] HTTP POST 방식으로 파일 전송 (feat. requests, Flask.request)
 https://programmer-ririhan.tistory.com/211
 
-# yolov5
+29. yolov5
 https://lynnshin.tistory.com/47
 
-# yolov4
+30. yolov4
 https://webnautes.tistory.com/1417
+
+31. Python requests 모듈(module) 사용법
+https://me2nuk.com/Python-requests-module-example/#post
+
+32. Python3 Request 파일전송
+https://gist.github.com/Jack0804/fbeeb743a3c952ac6b68695fdefeb6b1
