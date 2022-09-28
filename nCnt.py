@@ -80,7 +80,7 @@ def machine():
     current_time = int(dt[17:19])
     if old_time != current_time:
         old_time = current_time
-        if  current_time % 3 == 0:
+        if  current_time % 30 == 0:
             cam()
             analysis()
             with open('ncnt.txt', "w") as file_write:
@@ -95,14 +95,15 @@ def show():
     
 app = Flask(__name__)
 
-@app.route('/')
-def OUTPUT():
+while True:
     machine()
-    show()
-    current_time = datetime.now()
-    current_time = str(current_time)[0:19]  
-    return render_template('index.html', counting = ncnt_people, time = current_time)
+    @app.route('/')
+    def OUTPUT():
+        show()
+        current_time = datetime.now()
+        current_time = str(current_time)[0:19]  
+        return render_template('index.html', counting = ncnt_people, time = current_time)
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run()#host='0.0.0.0')
+    if __name__ == '__main__':
+        app.debug = True
+        app.run()#host='0.0.0.0')
