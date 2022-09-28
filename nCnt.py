@@ -16,7 +16,7 @@ output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 def yolo(frame, size, score_threshold, nms_threshold):
   # 이미지의 높이, 너비, 채널 받아오기
-  height, width, channels = frame.shape
+  height, width = frame.shape
 
   # 네트워크에 넣기 위한 전처리
   blob = cv2.dnn.blobFromImage(frame, 0.00392, (size, size), (0, 0, 0), True, crop=False)
@@ -129,7 +129,7 @@ with open('ncnt.txt', "r") as file_read:
 # 여기부터 플래스크 백엔드, 수정해야 함
 app = Flask(__name__)
 
-@app.route('/image')
+@app.route('/')
 def OUTPUT():
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
@@ -137,4 +137,4 @@ def OUTPUT():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0')
+    app.run()#host='0.0.0.0')
