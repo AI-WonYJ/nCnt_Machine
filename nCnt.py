@@ -71,7 +71,7 @@ def analysis():
     size_list = [320, 416, 608]
     global ncnt_people
     ncnt_people = 0
-    frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
+    frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)    
     print("\n사람 수: {0}명".format(ncnt_people))
 
 def machine():
@@ -80,7 +80,7 @@ def machine():
     current_time = int(dt[14:16])
     if old_time != current_time:
         old_time = current_time
-        ot = dt[12:19]
+        ot = dt[11:16]
         if  current_time % 1 == 0:
             cam()
             analysis()
