@@ -7,6 +7,7 @@ from datetime import datetime
 classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "dining table",
            "laptop", "remote", "keyboard", "cell phone", "microwave", "refrigerator", "book"]
 old_time = 0
+ot = 0
 
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 layer_names = net.getLayerNames()
@@ -74,13 +75,13 @@ def analysis():
     print("\n사람 수: {0}명".format(ncnt_people))
 
 def machine():
-    global old_time
-    global ncnt_people
+    global old_time, ncnt_people, ot
     dt = str(datetime.now())
-    current_time = int(dt[17:19])
+    current_time = int(dt[14:16])
     if old_time != current_time:
         old_time = current_time
-        if  current_time % 30 == 0:
+        ot = dt[12:19]
+        if  current_time % 1 == 0:
             cam()
             analysis()
             with open('ncnt.txt', "w") as file_write:
@@ -95,15 +96,14 @@ def show():
     
 app = Flask(__name__)
 
-while True:
+@app.route('/')
+def OUTPUT():
     machine()
-    @app.route('/')
-    def OUTPUT():
-        show()
-        current_time = datetime.now()
-        current_time = str(current_time)[0:19]  
-        return render_template('index.html', counting = ncnt_people, time = current_time)
+    show()
+    current_time = datetime.now()
+    current_time = str(current_time)[0:19]  
+    return render_template('index.html', counting = ncnt_people, time = current_time, old_time = ot)
 
-    if __name__ == '__main__':
-        app.debug = True
-        app.run()#host='0.0.0.0')
+if __name__ == '__main__':
+    app.debug = True
+    app.run()#host='0.0.0.0')
