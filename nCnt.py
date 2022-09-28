@@ -3,8 +3,6 @@ from flask import Flask, render_template
 import cv2
 import numpy as np
 from datetime import datetime
-import time
-import random
 
 classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "dining table",
            "laptop", "remote", "keyboard", "cell phone", "microwave", "refrigerator", "book"]
@@ -50,7 +48,7 @@ def yolo(frame, size, score_threshold, nms_threshold):
             pass
   return frame
 
-def Cam():
+def cam():
     cap = cv2.VideoCapture(0)
     if cap.isOpened():
         while True:
@@ -66,15 +64,7 @@ def Cam():
         print('no camera!')
     cap.release()
 
-def machine():
-    global old_time
-    dt = str(datetime.now())
-    current_time = int(dt[17:19])
-    if old_time != current_time:
-        old_time = current_time
-        if  current_time % 3 == 0:
-        print(dt[0:19]) #picture()
-    Cam()
+def analysis():
     img = "photo.jpg"
     frame = cv2.imread(img)
     size_list = [320, 416, 608]
@@ -83,24 +73,32 @@ def machine():
     frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
     print("\n사람 수: {0}명".format(ncnt_people))
 
+def machine():
+    global old_time
+    global ncnt_people
+    dt = str(datetime.now())
+    current_time = int(dt[17:19])
+    if old_time != current_time:
+        old_time = current_time
+        if  current_time % 1 == 0:
+            cam()
+            analysis()
+            with open('ncnt.txt', "w") as file_write:
+                file_write.write(ncnt_people)
 
-
-with open('ncnt.txt', "w") as file_write:
-  file_write.write(ncnt_people)
-
-# machine()
-
-with open('ncnt.txt', "r") as file_read:
-  for line in file_read:
-    print(line)
-    ncnt_people = line
+def show():
+    global ncnt_people
+    with open('ncnt.txt', "r") as file_read:
+        for line in file_read:
+            print(line)
+            ncnt_people = line
     
-    
-
 app = Flask(__name__)
 
 @app.route('/')
 def OUTPUT():
+    machine()
+    show()
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
     return render_template('index.html', counting = ncnt_people, time = current_time)
