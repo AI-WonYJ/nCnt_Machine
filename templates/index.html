@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="1">
   <title>동방 출력 페이지</title>
   <style>
     h1 {      
@@ -14,7 +15,7 @@
     margin:0 auto;
   }
   .txtbox {
-    width: 30%;
+    width: 40%;
     border:1px solid #222;
     background-color: #d3d3d3;
     padding:15px;
@@ -78,18 +79,22 @@
   </style>
 </head>
 <body>
-  <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://saint.ssu.ac.kr/irj/portal" target="_blank" rel="noopener noreferrer">SSCC</a></h1>
+  <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://ssccpromotion.xyz/" target="_blank" rel="noopener noreferrer">SSCC</a></h1>
   <div style="text-align:center;">
     <br><br>
     <img src="{{ url_for('static' , filename='images/kakao_lion.png')}}" alt="main Image" class="main-image"><br><br><br>
     <form>
       <div class="txtbox" style="text-align:center;">
-        동아리 인원 수 출력:  {{counting}}명<br>
-        측정시간: {{time}}
+        동아리 인원 수 출력:  {{counting}}명  (기준: {{old_time}})<br>
+        현재 시간: {{time}}
       </div>
-      <button class="w-btn w-btn-indigo" type="summit">
+      <br>
+      1분마다 자동 새로고침 중입니다.
+      <br>
+      새로고침은 대략 12초 소요됩니다.
+      <!-- <button class="w-btn w-btn-indigo" type="summit">
         Button
-      </button>
+      </button> -->
     </form>
     </div>
   </div>
