@@ -23,12 +23,23 @@
     text-align: left;
   }
 
-  a {
+  .hrek{
     color: white;
     text-decoration-line: none;
   }
 
-  a:hover {
+  .hrek:hover {
+    color: red;
+    text-decoration: underline;
+  }
+
+  .sorce{
+    color: white;
+    font-size: 0.5em;
+    text-decoration-line: none;
+  }
+
+  .sorce:hover {
     color: red;
     text-decoration: underline;
   }
@@ -89,7 +100,8 @@
 </head>
 <body>
   <header>
-    <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://ssccpromotion.xyz/" target="_blank" rel="noopener noreferrer">SSCC</a></h1>
+    <h1><img src="{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image">  <a href="https://ssccpromotion.xyz/" class = "hrek" target="_blank" rel="noopener noreferrer">SSCC</a>
+      <a href="https://github.com/AI-WonYJ/nCnt_Machine/tree/main" class="sorce" target="_blank" rel="noopener noreferrer">소스코드</a></h1>
   </header>
   
   <main>
