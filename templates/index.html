@@ -16,19 +16,19 @@
     <main>
       <div style="text-align:center;">
         <br><br>
-        {% if counting == "0" %}
+        {% if counting == 0 %}
           <img src="{{ url_for('static' , filename='images/0 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "1" %}
+        {% elif counting == 1 %}
           <img src="{{ url_for('static' , filename='images/1 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "2" %}
+        {% elif counting == 2 %}
           <img src="{{ url_for('static' , filename='images/2 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "3" %}
+        {% elif counting == 3 %}
           <img src="{{ url_for('static' , filename='images/3 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "4" %}
+        {% elif counting == 4 %}
           <img src="{{ url_for('static' , filename='images/4 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "5" %}
+        {% elif counting == 5 %}
           <img src="{{ url_for('static' , filename='images/5 people.png')}}" alt="main Image" class="main-image">
-        {% elif counting == "6" %}
+        {% elif counting == 6 %}
           <img src="{{ url_for('static' , filename='images/6 people.png')}}" alt="main Image" class="main-image">
         {% else %}
           <img src="{{ url_for('static' , filename='images/people.png')}}" alt="main Image" class="main-image">
