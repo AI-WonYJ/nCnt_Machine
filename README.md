@@ -1,2 +1,3 @@
 # nCnt_Machine
-성능 개선을 위한 repository
+배포 소스코드 repository
+http://114.71.48.94:8080/
