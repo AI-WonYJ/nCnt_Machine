@@ -94,15 +94,23 @@ def show():
             print(line)
             ncnt_people = line
     
+ncnt_people_l = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+a = 0
+    
 app = Flask(__name__)
 
 @app.route('/')
 def OUTPUT():
-    machine()
-    show()
+    global ncnt_people, a
+    # machine()
+    # show()
+    ncnt_people = ncnt_people_l[a]
+    a += 1
+    if a == 9:
+        a = 0
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
-    return render_template('index.html', counting = ncnt_people, time = current_time, old_time = ot)
+    return render_template('new.html', counting = ncnt_people, time = current_time, old_time = ot)
 
 if __name__ == '__main__':
     app.debug = True
