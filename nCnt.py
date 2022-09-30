@@ -9,11 +9,12 @@ classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "
 old_time = 0
 ot = 0
 
-net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
+net = cv2.dnn.readNet("C:/Users/Won/Desktop/Coding/1. nCnt_Machine/Machine/yolov3.weights", "C:/Users/Won/Desktop/Coding/1. nCnt_Machine/Machine/yolov3.cfg")
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 def yolo(frame, size, score_threshold, nms_threshold):
+  global ncnt_people
   height, width, channels = frame.shape
   blob = cv2.dnn.blobFromImage(frame, 0.00392, (size, size), (0, 0, 0), True, crop=False)
   net.setInput(blob)
@@ -37,7 +38,6 @@ def yolo(frame, size, score_threshold, nms_threshold):
               confidences.append(float(confidence))
               class_ids.append(class_id)
   indexes = cv2.dnn.NMSBoxes(boxes, confidences, score_threshold=score_threshold, nms_threshold=nms_threshold)
-  global ncnt_people
   for i in range(len(boxes)):
       if i in indexes:
           x, y, w, h = boxes[i]
@@ -49,31 +49,6 @@ def yolo(frame, size, score_threshold, nms_threshold):
             pass
   return frame
 
-def cam():
-    cap = cv2.VideoCapture(0)
-    if cap.isOpened():
-        while True:
-            ret, frame = cap.read()
-            if ret:
-                if cv2.waitKey(1) == -1:
-                    cv2.imwrite('photo.jpg',frame)
-                    break
-            else:
-                print('no frame')
-                break
-    else:
-        print('no camera!')
-    cap.release()
-
-def analysis():
-    img = "photo.jpg"
-    frame = cv2.imread(img)
-    size_list = [320, 416, 608]
-    global ncnt_people
-    ncnt_people = 0
-    frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)    
-    print("\n사람 수: {0}명".format(ncnt_people))
-
 def machine():
     global old_time, ncnt_people, ot
     dt = str(datetime.now())
@@ -82,32 +57,31 @@ def machine():
         old_time = current_time
         ot = dt[11:16]
         if  current_time % 1 == 0:
-            cam()
-            analysis()
-            with open('ncnt.txt', "w") as file_write:
-                file_write.write(str(ncnt_people))
-
-def show():
-    global ncnt_people
-    with open('ncnt.txt', "r") as file_read:
-        for line in file_read:
-            print(line)
-            ncnt_people = line
-    
-ncnt_people_l = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-a = 0
+            cap = cv2.VideoCapture(0)
+            if cap.isOpened():
+                while True:
+                    ret, frame = cap.read()
+                    if ret:
+                        if cv2.waitKey(1) == -1:
+                            cv2.imwrite('photo.jpg',frame)
+                            break
+                    else:
+                        print('no frame')
+                        break
+            else:
+                print('no camera!')
+            cap.release()
+            img = "photo.jpg"
+            frame = cv2.imread(img)
+            size_list = [320, 416, 608]
+            ncnt_people = 0
+            frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
     
 app = Flask(__name__)
 
 @app.route('/')
 def OUTPUT():
-    global ncnt_people, a
-    # machine()
-    # show()
-    ncnt_people = ncnt_people_l[a]
-    a += 1
-    if a == 9:
-        a = 0
+    machine()
     current_time = datetime.now()
     current_time = str(current_time)[0:19]  
     return render_template('new.html', counting = ncnt_people, time = current_time, old_time = ot)
