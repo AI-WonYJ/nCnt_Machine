@@ -4,12 +4,19 @@ h1 {
   color:#fff;
 }
 
+h2 {      
+  padding:10px;
+  background-color:#000;
+  color:#fff;
+}
+
 form {
   margin:0 auto;
 }
+
 .txtbox {
   width: 40%;
-  border:1px solid #222;
+  border:1px solid #222;  
   background-color: #d3d3d3;
   padding:15px;
   margin:0 auto;
@@ -82,8 +89,7 @@ button {
 }
 
 footer {
-  color: black;
-  height: 50px;
+  background-color: #002540;
   display: flex;
   align-items: center;
   justify-content: center;
