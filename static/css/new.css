@@ -23,7 +23,11 @@ form {
   text-align: left;
 }
 
-.hrek{
+.icon {
+  width: 40px;
+}
+
+.hrek {
   color: white;
   text-decoration-line: none;
 }
