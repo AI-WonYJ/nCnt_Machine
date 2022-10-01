@@ -38,7 +38,7 @@
 
         <form>
           <div class="txtbox" style="text-align:center;">
-            동아리 인원 수 출력:  {{counting}}명  (기준: {{old_time}})<br>
+            동아리 인원 수 출력:  <span style = "font-size:25px;"><storng>{{counting}}</storng></span>명  (기준: {{old_time}})<br>
             현재 시간: {{time}}
           </div>
           <br>
@@ -49,17 +49,21 @@
           현재 버전은 베타버전이며, 오류가 발생할 수 있습니다.
           <br>
           문제가 발생했을 경우 카카오톡 SSCC 일반방에 올려주세요.
-          <br><br><br><br><br>
-          <!-- <button class="w-btn w-btn-indigo" type="summit">
-            Button
-          </button> -->
+          <br><br><br><br><br><br><br><br>
         </form>
 
       </div>
     </main>
 
     <footer>
-      <a href="https://ai-wonyj.github.io/SSCC_Contributor/" style="color: #6e6e6e; font-size: 18px">© 2022 SoongSil Computing Club</a>
+      <h2>
+        <a href="https://www.facebook.com/groups/ssccob/" class = "hrek" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static' , filename='Machine/static/images/facebook.png')}}" alt="Facebook Image" class="footer-image"></a>
+        
+        <a href="https://www.instagram.com/sscc_ssu/" class = "hrek" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static' , filename='Machine/static/images/instagram.png')}}" alt="Instagram Image" class="footer-image"></a>
+        
+        <br><br>
+      </h2>
+      <a href="https://ai-wonyj.github.io/SSCC_Contributor/" style="text-decoration-line: none; color: white; font-size: 18px">© 2022 SoongSil Computing Club</a>
     </footer>
 
   </body>
