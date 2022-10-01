@@ -81,11 +81,11 @@ button {
   background: white;
 }
 
-.footer {
-width:1200px auto;   /* 너비 */
-height:100px;  /* 높이 */
-padding-top: 10px;
-border-top:2px solid #222;
-text-align: center;
-color: #879;
+footer {
+  color: black;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
