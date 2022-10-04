@@ -95,7 +95,7 @@ button {
 footer {
   height: 100px;
   background-color: #002540;
-  display: flex;
+  padding: 40px;
   align-items: center;
   justify-content: center;
   text-align: center;
