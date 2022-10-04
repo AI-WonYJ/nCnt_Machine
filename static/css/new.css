@@ -93,9 +93,16 @@ button {
 }
 
 footer {
+  height: 100px;
   background-color: #002540;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.fot img {
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
 }
