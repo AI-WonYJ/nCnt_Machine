@@ -1,23 +1,30 @@
+# ============ Set ============
+
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template
 import cv2
 import numpy as np
 from datetime import datetime
 
-# 이미지 분석 classes
+# 변수 지정
+previous_time, standard_time, ncnt_people = 0, 0, 0
+
+# 사물 class
 classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "dining table",
            "laptop", "remote", "keyboard", "cell phone", "microwave", "refrigerator", "book"]
-old_time, ot, ncnt_people, peo = 0, 0, 0, 0
 
 # Yolov3 네트워크 블러오기
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
+
+
+# ============ Function ============ 
+
 # Yolov3 분석 함수
 def yolo(frame, size, score_threshold, nms_threshold):
-    global ncnt_people, peo
-    peo = 0
+    global ncnt_people
     height, width, channels = frame.shape  # 이미지의 높이, 너비, 채널 받아오기
     blob = cv2.dnn.blobFromImage(frame, 0.00392, (size, size), (0, 0, 0), True, crop=False)  # 네트워크에 넣기 위한 전처리
     net.setInput(blob)  # 전치리된 blob 네트워크에 입력
@@ -57,12 +64,12 @@ def yolo(frame, size, score_threshold, nms_threshold):
     return frame
 
 def machine():
-    global old_time, ncnt_people, ot
-    dt = str(datetime.now())  # 현재시간 측정
-    current_time = int(dt[14:16])  # 현재 분 값 저장
-    if old_time != current_time:  # 기존 값과 다를 경우
-        old_time = current_time  # 기존 값에 새로운 분 값 저장
-        ot = dt[11:16]  # 기준 시간 설정 (시, 분)
+    global previous_time, ncnt_people, standard_time
+    moment_time = str(datetime.now())  # 현재시간 측정
+    current_time = int(moment_time[14:16])  # 현재 분 값 저장
+    if previous_time != current_time:  # 기존 값과 다를 경우
+        previous_time = current_time  # 기존 값에 새로운 분 값 저장
+        standard_time = moment_time[11:16]  # 기준 시간 설정 (시, 분)
         # 웹캠으로 사진 찍기
         if  current_time % 1 == 0:  # 1초마다 실행
             cap = cv2.VideoCapture(0)
@@ -85,6 +92,17 @@ def machine():
             size_list = [320, 416, 608]  # 입력 사이즈 리스트 (Yolov3에서 사용되는 네트워크 입력 이미지 사이즈)
             frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)  # 이미지 분석
 
+
+
+
+
+
+
+
+
+
+
+
 # 웹 출력    
 app = Flask(__name__)
 
@@ -93,7 +111,7 @@ def OUTPUT():
     machine()  # machine 작동
     current_time = datetime.now()  # 실시간 시간 측정
     current_time = str(current_time)[0:19]  # 필요한 부분 가공
-    return render_template('new.html', counting = ncnt_people, time = current_time, old_time = ot)  # Flask로 new.html에 변수 값 전달
+    return render_template('new.html', counting = ncnt_people, time = current_time, old_time = standard_time)  # Flask로 new.html에 변수 값 전달
 
 if __name__ == '__main__':
     app.debug = True
