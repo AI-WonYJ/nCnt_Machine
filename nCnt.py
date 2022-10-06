@@ -7,7 +7,7 @@ from datetime import datetime
 # 이미지 분석 classes
 classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "dining table",
            "laptop", "remote", "keyboard", "cell phone", "microwave", "refrigerator", "book"]
-old_time, ot = 0, 0
+old_time, ot, ncnt_people, peo = 0, 0, 0, 0
 
 # Yolov3 네트워크 블러오기
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
@@ -16,7 +16,8 @@ output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 # Yolov3 분석 함수
 def yolo(frame, size, score_threshold, nms_threshold):
-    global ncnt_people
+    global ncnt_people, peo
+    peo = 0
     height, width, channels = frame.shape  # 이미지의 높이, 너비, 채널 받아오기
     blob = cv2.dnn.blobFromImage(frame, 0.00392, (size, size), (0, 0, 0), True, crop=False)  # 네트워크에 넣기 위한 전처리
     net.setInput(blob)  # 전치리된 blob 네트워크에 입력
@@ -43,6 +44,7 @@ def yolo(frame, size, score_threshold, nms_threshold):
                 confidences.append(float(confidence))
                 class_ids.append(class_id)
     indexes = cv2.dnn.NMSBoxes(boxes, confidences, score_threshold=score_threshold, nms_threshold=nms_threshold)# 후보 박스(x, y, width, height)와 confidence(상자가 물체일 확률) 출력
+    ncnt_people = 0
     for i in range(len(boxes)):
         if i in indexes:
             x, y, w, h = boxes[i]
@@ -69,7 +71,8 @@ def machine():
                     ret, frame = cap.read()
                     if ret:
                         if cv2.waitKey(1) == -1:
-                            cv2.imwrite('photo.jpg',frame)  # 이미지 저장
+                            fliped = cv2.flip(frame, 0)
+                            cv2.imwrite('photo.jpg',fliped)  # 이미지 저장
                             break
                     else:
                         print('no frame')
@@ -80,7 +83,6 @@ def machine():
             img = "photo.jpg"  # 이미지 경로
             frame = cv2.imread(img)  # 이미지 읽어오기
             size_list = [320, 416, 608]  # 입력 사이즈 리스트 (Yolov3에서 사용되는 네트워크 입력 이미지 사이즈)
-            ncnt_people = 0  # ncnt_people 변수 초기화
             frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)  # 이미지 분석
 
 # 웹 출력    
