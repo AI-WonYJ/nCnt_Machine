@@ -23,8 +23,9 @@ form {
   text-align: left;
 }
 
-.icon {
-  width: 40px;
+.header-image  {
+  width: 25px;
+  height: 25px;
 }
 
 .hrek {
