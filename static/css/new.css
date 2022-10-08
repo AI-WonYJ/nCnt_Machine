@@ -4,12 +4,14 @@
   font-weight: normal;
   font-style: normal;
 }
-body, html {
+
+header, footer {
   font-family: 'BMJUA', sans-serif;
   height: 100%;
   margin: 0;
   user-select : none;
 }
+
 
 
 h1 {      
@@ -38,8 +40,8 @@ form {
 }
 
 .header-image  {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
 }
 
 .hrek {
@@ -70,10 +72,10 @@ border: none;
 display: inline-block;
 padding: 15px 30px;
 border-radius: 15px;
-font-family: "paybooc-Light", sans-serif;
 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-text-decoration: none;
+font-family: "paybooc-Light", sans-serif;
 font-weight: 600;
+text-decoration: none;
 transition: 0.25s;
 }
 
@@ -92,6 +94,7 @@ transition: 0.25s;
   text-decoration-line: none;
   font-size: 18px
 }
+
 footer {
   background-color: #002540;
   padding: 50px;
@@ -100,7 +103,7 @@ footer {
   text-align: center;
 }
 
-.icon {
+.icon, .footer-image {
   width: 40px;
   height: 40px;
   margin-top: 10px;
