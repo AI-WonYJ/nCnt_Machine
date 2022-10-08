@@ -67,6 +67,7 @@ form {
 
 .w-btn {
 margin: 20px;
+height: 50px;
 position: relative;
 border: none;
 display: inline-block;
