@@ -63,11 +63,8 @@ form {
   text-decoration: underline;
 }
 
-button {
-  margin: 20px;
-}
-
 .w-btn {
+margin: 20px;
 position: relative;
 border: none;
 display: inline-block;
