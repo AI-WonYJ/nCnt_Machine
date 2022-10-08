@@ -84,8 +84,8 @@ transition: 0.25s;
 }
 
 .w-btn-indigo:hover {
-  color: skyblue;
-  background: white;
+  color: rgb(96, 181, 214);
+  background: #ececec;
 }
 
 .contributor{
