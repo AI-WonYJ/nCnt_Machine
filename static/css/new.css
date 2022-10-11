@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-header, form, button, footer {
+header, form, button, .beta, footer {
   font-family: 'BMJUA', sans-serif;
   height: 100%;
   margin: 0;
@@ -74,6 +74,7 @@ display: inline-block;
 padding: 15px 30px;
 border-radius: 15px;
 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+font-size: 16px;
 text-decoration: none;
 transition: 0.25s;
 }
@@ -88,6 +89,10 @@ transition: 0.25s;
   background: #ececec;
 }
 
+.beta{
+  font-size: 17px;
+}
+
 .contributor{
   color: #d7d7d7;
   text-decoration-line: none;
@@ -95,6 +100,9 @@ transition: 0.25s;
 }
 
 footer {
+  height: auto;
+  min-height: 100%;
+  bottom: 0;
   background-color: #002540;
   padding: 50px;
   align-items: center;
