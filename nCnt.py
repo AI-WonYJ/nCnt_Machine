@@ -94,14 +94,7 @@ def machine():
 
 
 
-
-
-
-
-
-
-
-
+# ============ Machine ============ 
 
 # 웹 출력    
 app = Flask(__name__)
