@@ -78,6 +78,10 @@ def machine():
                     ret, frame = cap.read()
                     if ret:
                         if cv2.waitKey(1) == -1:
+                            x,y,w,h = 321, 85, 800, 470 # 관심영역 선택
+                            roi = frame[y:y+h, x:x+w]   # 관심영역 지정
+                            roi = cv2.blur(roi, (ksize, ksize)) # 블러(모자이크) 처리
+                            frame[y:y+h, x:x+w] = roi   # 원본 이미지에 적용
                             fliped = cv2.flip(frame, 0)
                             cv2.imwrite('photo.jpg',fliped)  # 이미지 저장
                             break
