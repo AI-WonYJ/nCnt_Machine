@@ -165,3 +165,6 @@ https://blog.naver.com/nsm4421/222645790507
 
 55. OpenCV - 21. 블러링을 활용한 모자이크 처리, 이미지 스케치 효과 적용하기
 https://bkshin.tistory.com/entry/OpenCV-21-%EB%B8%94%EB%9F%AC%EB%A7%81%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%AA%A8%EC%9E%90%EC%9D%B4%ED%81%AC-%EC%B2%98%EB%A6%AC-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%8A%A4%EC%BC%80%EC%B9%98-%ED%9A%A8%EA%B3%BC-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0
+
+56. [css] div 양끝쪽 정렬(float)
+https://soraji.github.io/markup/2020/05/20/float/
