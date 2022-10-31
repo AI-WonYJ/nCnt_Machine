@@ -54,6 +54,12 @@ form {
   text-decoration: underline;
 }
 
+.Dev {
+  font-size: 20px;
+  float: right;
+  display:inline-block;
+}
+
 .sorce{
   color: white;
   font-size: 0.5em;
