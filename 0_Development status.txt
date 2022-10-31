@@ -1,5 +1,5 @@
 10/31
-  - index.html 수정
+  - 페이지 구성 추가 및 변경
   - 거울로 인한 측정 오류 개선: 특정 부분 블러딩 처리
   - Machine 안정화 및 속도 개선: Multi Processing
   - Count 새로고침 방식 변경: Button을 누를 경우 새로고침
