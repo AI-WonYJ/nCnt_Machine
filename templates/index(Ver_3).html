@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <title>동방 출력 페이지</title>
-    <link rel="stylesheet" href = 'static/css/new.css'>
+    <link rel="stylesheet" href = "{{ url_for('static', filename='css/new.css')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="https://ssccpromotion.xyz/images/favicon.png">
   </head>
 
   <body>
     <header>
-      <h1><a href="https://ssccpromotion.xyz/" class = "hrek" target="_blank" rel="noopener noreferrer"><img src = 'images/SSCC_logo.png' alt="sscc Logo Image" class="header-image"> SSCC</a>
+      <h1><a href="https://ssccpromotion.xyz/" class = "hrek" target="_blank" rel="noopener noreferrer"><img src = "{{ url_for('static' , filename='images/SSCC_logo.png')}}" alt="sscc Logo Image" class="header-image"> SSCC</a>
       <a href="https://github.com/AI-WonYJ/nCnt_Machine/tree/main" class="sorce" target="_blank" rel="noopener noreferrer">소스코드</a></h1>
     </header>
     
     <main>
       <div style="text-align:center;">
         <br><br>
-          <img src="images/0 people.png" alt="main Image" class="main-image">
+          <img src="{{ url_for('static', filename='images/0 people.png')}}" alt="main Image" class="main-image">
         <br><br><br>
 
         <form>
@@ -41,12 +41,12 @@
 
     <footer>
       <div class = "footer-img">
-        <a href="https://www.facebook.com/groups/ssccob/" class = "icon" target="_blank" rel="noopener noreferrer"><img src='images/facebook.png' alt="Facebook Image" class="footer-image"></a>
-        <a href="https://www.instagram.com/sscc_ssu/" class = "icon" target="_blank" rel="noopener noreferrer"><img src='images/instagram.png' alt="Instagram Image" class="footer-image"></a>
-        <a href="https://ssccpromotion.xyz/#SSCC" class = "icon" target="_blank" rel="noopener noreferrer"><img src='images/SSCC_logo_rev.png' alt="SSCC Image" class="footer-image"></a>
-        <a href="https://open.kakao.com/me/SSCC" class = "icon" target="_blank" rel="noopener noreferrer"><img src='images/kakao.png' alt="Kakao Image" class="footer-image"></a>
+        <a href="{{ url_for('static', filename='https://www.facebook.com/groups/ssccob/')}}" class = "icon" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static', filename='images/facebook.png')}}" alt="Facebook Image" class="footer-image"></a>
+        <a href="{{ url_for('static', filename='https://www.instagram.com/sscc_ssu/')}}" class = "icon" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static', filename='images/instagram.png')}}" alt="Instagram Image" class="footer-image"></a>
+        <a href="{{ url_for('static', filename='https://ssccpromotion.xyz/#SSCC')}}" class = "icon" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static', filename='images/SSCC_logo_rev.png')}}" alt="SSCC Image" class="footer-image"></a>
+        <a href="{{ url_for('static', filename='https://open.kakao.com/me/SSCC')}}" class = "icon" target="_blank" rel="noopener noreferrer"><img src="{{ url_for('static', filename='images/kakao.png')}}" alt="Kakao Image" class="footer-image"></a>
       </div>
-      <a href="https://ai-wonyj.github.io/SSCC_Contributor/" class = "contributor" target="_blank" rel="noopener noreferrer">© 2022 SoongSil Computing Club</a>
+      <a href="{{ url_for('static', filename='https://ai-wonyj.github.io/SSCC_Contributor/')}}" class = "contributor" target="_blank" rel="noopener noreferrer">© 2022 SoongSil Computing Club</a>
     </footer>
   </body>
 </html>
