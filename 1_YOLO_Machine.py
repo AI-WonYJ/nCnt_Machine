@@ -8,7 +8,7 @@ from datetime import datetime
 
 # 변수 지정
 previous_time, standard_time, ncnt_people = 0, 0, 0
-ksize = 30              # 블러 처리에 사용할 커널 크기
+ksize = 20              # 블러 처리에 사용할 커널 크기
 
 # 사물 class
 classes = ["person",  "bench", "umbrella", "handbag","bottle", "chair", "bed", "dining table",
@@ -56,48 +56,56 @@ def yolo(frame, size, score_threshold, nms_threshold):
     for i in range(len(boxes)):
         if i in indexes:
             x, y, w, h = boxes[i]
+            class_name = "People"
+            label = f"{class_name} {confidences[i]:.2f}"
+            color = (0, 255, 0)
             try:  # 인식된 사물 분석 시도
                 class_name = classes[class_ids[i]]
                 if class_name == "person":
                     ncnt_people += 1  # 사람이 인식되면 ncnt_people 변수 +1
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+                    cv2.rectangle(frame, (x-1, y), (x + len(class_name) * 13 + 65, y -25), color, -1)
+                    cv2.putText(frame, label, (x, y - 8), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
             except IndexError:  # 오류 발생시 pass
                 pass
+            cv2.imwrite('analysis.jpg', frame)  # 이미지 저장
     return frame
 
 def machine():
     global previous_time, ncnt_people, standard_time
     moment_time = str(datetime.now())  # 현재시간 측정
     current_time = int(moment_time[14:16])  # 현재 분 값 저장
-    if previous_time != current_time:  # 기존 값과 다를 경우
-        previous_time = current_time  # 기존 값에 새로운 분 값 저장
-        standard_time = moment_time[11:16]  # 기준 시간 설정 (시, 분)
-        # 웹캠으로 사진 찍기
-        if  current_time % 1 == 0:  # 1초마다 실행
-            cap = cv2.VideoCapture(0)
-            if cap.isOpened():
-                while True:
-                    ret, frame = cap.read()
-                    if ret:
-                        if cv2.waitKey(1) == -1:
-                            x,y,w,h = 321, 85, 80, 47 # 관심영역 선택
-                            roi = frame[y:y+h, x:x+w]   # 관심영역 지정
-                            roi = cv2.blur(roi, (ksize, ksize)) # 블러(모자이크) 처리
-                            frame[y:y+h, x:x+w] = roi   # 원본 이미지에 적용
-                            cv2.imwrite('photo.jpg', frame)  # 이미지 저장
-                            break
-                    else:
-                        print('no frame')
-                        break
+    #if previous_time != current_time:  # 기존 값과 다를 경우
+    previous_time = current_time  # 기존 값에 새로운 분 값 저장
+    standard_time = moment_time[11:19]  # 기준 시간 설정 (시, 분)
+    # 웹캠으로 사진 찍기
+    # if  current_time % 1 == 0:  # 1초마다 실행
+    cap = cv2.VideoCapture(0)
+    if cap.isOpened():
+        while True:
+            ret, frame = cap.read()
+            if ret:
+                if cv2.waitKey(1) == -1:
+                    x,y,w,h = 355, 330, 80, 94 # 관심영역 선택
+                    roi = frame[y:y+h, x:x+w]   # 관심영역 지정
+                    roi = cv2.blur(roi, (ksize, ksize)) # 블러(모자이크) 처리
+                    frame[y:y+h, x:x+w] = roi   # 원본 이미지에 적용
+                    fliped = cv2.flip(frame, 0)
+                    cv2.imwrite('photo.jpg', fliped)  # 이미지 저장
+                    break
             else:
-                print('no camera!')
-            cap.release()
-            img = "photo.jpg"  # 이미지 경로
-            frame = cv2.imread(img)  # 이미지 읽어오기
-            size_list = [320, 416, 608]  # 입력 사이즈 리스트 (Yolov3에서 사용되는 네트워크 입력 이미지 사이즈)
-            frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)  # 이미지 분석
-            with open("nCnt.txt", "w", encoding = "utf8") as report_file:
-                report_file.write("{0}/{1}".format(ncnt_people,standard_time))
-                print(ncnt_people)
+                print('no frame')
+                break
+    else:
+        print('no camera!')
+    cap.release()
+    img = "photo.jpg"  # 이미지 경로
+    frame = cv2.imread(img)  # 이미지 읽어오기
+    size_list = [320, 416, 608]  # 입력 사이즈 리스트 (Yolov3에서 사용되는 네트워크 입력 이미지 사이즈)
+    frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)  # 이미지 분석
+    with open("nCnt.txt", "w", encoding = "utf8") as report_file:
+        report_file.write("{0}/{1}".format(ncnt_people,standard_time))
+        print(ncnt_people)
 
 
 
@@ -105,3 +113,4 @@ def machine():
 
 while True:
     machine()
+
