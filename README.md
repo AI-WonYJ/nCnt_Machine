@@ -74,3 +74,7 @@ http://114.71.48.94:8080/
 
 5/24 ~ 7/30
   - 프로젝트 기획 및 재료 준비
+
+구동방법
+1. putty: vncserver -geometry 1920x1080
+2. Raspberry Pi
