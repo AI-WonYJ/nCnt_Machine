@@ -77,4 +77,4 @@ http://114.71.48.94:8080/
 
 구동방법
 1. putty: vncserver -geometry 1920x1080
-2. Raspberry Pi
+2. Raspberry Pi: python Yolo_Machine.py   /   uvicorn Fastapi_Machine:app --reload --port=5000 -- host=0.0.0.0
