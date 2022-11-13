@@ -75,6 +75,6 @@ http://114.71.48.94:8080/
 5/24 ~ 7/30
   - 프로젝트 기획 및 재료 준비
 
-구동방법
-1. putty: vncserver -geometry 1920x1080
-2. Raspberry Pi: python Yolo_Machine.py   /   uvicorn Fastapi_Machine:app --reload --port=5000 -- host=0.0.0.0
+구동방법  
+``` putty: vncserver -geometry 1920x1080```  
+```Raspberry Pi: python Yolo_Machine.py   /   uvicorn Fastapi_Machine:app --reload --port=5000 -- host=0.0.0.0```
